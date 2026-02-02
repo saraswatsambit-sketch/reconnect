@@ -2,69 +2,61 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>For Arya</title>
+  <title>Café Arya</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
     body {
       margin: 0;
-      font-family: "Georgia", "Times New Roman", serif;
-      background: linear-gradient(135deg, #f5efe6, #e7dfd5);
-      color: #3f2f25;
+      font-family: "Poppins", Arial, sans-serif;
+      background: linear-gradient(135deg, #f8efe4, #efe1d1);
+      color: #3b2f2f;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
     }
 
-    .card {
-      background: #fffaf4;
-      max-width: 520px;
-      width: 90%;
-      padding: 36px 32px;
-      border-radius: 18px;
+    .menu {
+      background: #fffaf3;
+      max-width: 540px;
+      width: 92%;
+      padding: 32px;
+      border-radius: 20px;
+      box-shadow: 0 25px 45px rgba(0,0,0,0.15);
       text-align: center;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-      animation: fadeIn 0.8s ease;
+      animation: fade 0.6s ease;
     }
 
     h2 {
-      margin-bottom: 14px;
-      font-weight: normal;
-      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      opacity: 0.7;
+      margin-bottom: 20px;
     }
 
     p {
       line-height: 1.7;
-      margin: 10px 0;
       font-size: 15px;
+      margin: 10px 0;
     }
 
-    button {
-      margin-top: 18px;
-      padding: 12px 22px;
-      font-size: 14px;
-      border-radius: 20px;
-      border: none;
+    .item {
+      background: #f5e6d6;
+      padding: 14px;
+      border-radius: 14px;
+      margin: 12px 0;
       cursor: pointer;
-      background: #6f4e37;
-      color: #fff;
       transition: all 0.2s ease;
     }
 
-    button:hover {
-      background: #5a3f2c;
-      transform: translateY(-1px);
-    }
-
-    button.secondary {
-      background: transparent;
-      color: #6f4e37;
-      border: 1px solid #6f4e37;
-    }
-
-    button.secondary:hover {
-      background: #f1e6d8;
+    .item:hover {
+      background: #ecd5bb;
+      transform: translateY(-2px);
     }
 
     .hidden {
@@ -73,69 +65,97 @@
 
     .note {
       font-size: 13px;
-      opacity: 0.75;
       margin-top: 14px;
+      opacity: 0.75;
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
 
-  <!-- STEP 1 -->
-  <div class="card" id="step1">
-    <h2>Hey Arya,</h2>
-    <p>Thanks for taking a moment to be here.</p>
-    <button onclick="nextStep()">Continue</button>
+<!-- STEP 1 -->
+<div class="menu" id="step1">
+  <h2>☕ Café Arya</h2>
+  <div class="subtitle">Today’s special menu</div>
+
+  <div class="item" onclick="next()">
+    ☕ One sincere apology  
+    <br><small>(served warm, no excuses)</small>
   </div>
 
-  <!-- STEP 2 -->
-  <div class="card hidden" id="step2">
-    <p>I wanted to start with an apology.</p>
-    <p>I’m sorry for how I acted.</p>
-    <p>I didn’t handle things with the care I should have.</p>
-    <p>You didn’t deserve that.</p>
-    <p>No explanations. Just honesty.</p>
-    <button onclick="nextStep()">One small request</button>
+  <div class="item" onclick="next()">
+    🫶 A calm, respectful conversation  
+    <br><small>(no pressure included)</small>
+  </div>
+</div>
+
+<!-- STEP 2 -->
+<div class="menu hidden" id="step2">
+  <h2>Hey Arya,</h2>
+
+  <p>
+    I genuinely want to say sorry.  
+    I didn’t handle things the way I should have.
+  </p>
+
+  <p>
+    No explanations.  
+    Just accountability.
+  </p>
+
+  <div class="item" onclick="next()">
+    👉 Continue to today’s request
+  </div>
+</div>
+
+<!-- STEP 3 -->
+<div class="menu hidden" id="step3">
+  <p>
+    If you’re comfortable with it,
+    could you please unblock me and accept my follow request?
+  </p>
+
+  <p>
+    Not to restart everything —  
+    just to allow a calm conversation.
+  </p>
+
+  <div class="item" onclick="yes()">
+    ☕ Okay, let’s start with a coffee
   </div>
 
-  <!-- STEP 3 -->
-  <div class="card hidden" id="step3">
-    <p>If you’re comfortable with it,</p>
-    <p>could you please unblock me and accept my follow request?</p>
-    <p>Not to rush anything—only to allow a calm, respectful conversation.</p>
-
-    <p class="note">
-      And if someday you feel okay with it,  
-      I’d love to take you to a café you enjoy.  
-      One coffee. No pressure ☕
-    </p>
-
-    <button onclick="yesResponse()">Okay, coffee sounds nice</button>
-    <br>
-    <button class="secondary" onclick="noResponse()">Not now</button>
+  <div class="item" onclick="no()">
+    🙏 Not today
   </div>
+
+  <div class="note">
+    For a certified café hopper —  
+    you choose the café 🙂
+  </div>
+</div>
 
 <script>
   let step = 1;
 
-  function nextStep() {
+  function next() {
     document.getElementById("step" + step).classList.add("hidden");
     step++;
     document.getElementById("step" + step).classList.remove("hidden");
   }
 
-  function yesResponse() {
-    alert("Thank you for reading this. I’ll wait respectfully.");
+  function yes() {
+    alert("Thank you. I’ll wait respectfully ☕");
   }
 
-  function noResponse() {
-    alert("I understand. Take care.");
+  function no() {
+    alert("I understand. Take care 🌿");
   }
 </script>
 
 </body>
 </html>
+
